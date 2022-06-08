@@ -25,7 +25,7 @@ export default class AppConfig extends Component {
 
   // Color Data
   static baseColor = 'white';
-  static primaryColor = '#60d67a';
-  static buttonColor = '#60d67a';
+  static primaryColor = '#F69809';
+  static buttonColor = '#F69809';
   static blackColor = 'black';
 }

@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-// import logger from 'redux-logger';
 import {
   persistStore,
   persistReducer,
@@ -15,8 +14,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import userSlice from './slices/userSlice';
 import globalSlice from './slices/globalSlice';
+import pokemonSlice from './slices/pokemonSlice';
 
 const reducers = combineReducers({
+  pokemon: pokemonSlice,
   user: userSlice,
   global: globalSlice,
 });

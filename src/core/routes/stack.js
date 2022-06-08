@@ -1,21 +1,17 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { useSelector } from 'react-redux';
-import { navigate } from './navigator';
 
-import { LoginScreen, RegisterScreen, HomeScreen } from '../../screens';
+import {
+  LoginScreen,
+  RegisterScreen,
+  HomeScreen,
+  DetailScreen,
+  PokebagScreen,
+} from '../../screens';
 
 const Stack = createNativeStackNavigator();
 
 const Router = () => {
-  const { id } = useSelector(state => state.user);
-
-  useEffect(() => {
-    if (id !== '' && id !== undefined) {
-      navigate('Home');
-    }
-  }, [id]);
-
   return (
     <Stack.Navigator
       initialRouteName="Login"
@@ -23,6 +19,8 @@ const Router = () => {
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Detail" component={DetailScreen} />
+      <Stack.Screen name="Pokebag" component={PokebagScreen} />
     </Stack.Navigator>
   );
 };
