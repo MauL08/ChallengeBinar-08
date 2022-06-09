@@ -38,7 +38,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: AppConfig.paddingXL,
+    marginHorizontal: AppConfig.paddingS,
     marginVertical: AppConfig.padding2XL,
   },
   prevButton: {
@@ -98,7 +98,7 @@ export const styles = StyleSheet.create({
     marginRight: ms(10),
   },
   numberingPageText: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
   },
 });

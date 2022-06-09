@@ -12,12 +12,13 @@ import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
 import { getPokedex, getPokemon } from '../../data/slices/pokemonSlice';
 import { Pokeball } from '../../core/assets';
+import { setLastSeen } from '../../data/slices/globalSlice';
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
 
-  const { isLoading } = useSelector(state => state.global);
+  const { isLoading, pagination } = useSelector(state => state.global);
   const { userInfo } = useSelector(state => state.user);
   const { pokemonData } = useSelector(state => state.pokemon);
 
@@ -30,6 +31,7 @@ const HomeScreen = () => {
       dispatch(getPokedex(pokemonData.next));
       if (numberPagination >= 0) {
         setNumberPagination(state => state + 1);
+        dispatch(setLastSeen(numberPagination + 1));
       }
     }
   };
@@ -41,6 +43,7 @@ const HomeScreen = () => {
       dispatch(getPokedex(pokemonData.previous));
       if (numberPagination > 0) {
         setNumberPagination(state => state - 1);
+        dispatch(setLastSeen(numberPagination - 1));
       }
     }
   };
@@ -101,9 +104,7 @@ const HomeScreen = () => {
                     style={styles.prevButton}>
                     <Text style={styles.textButton}>Sebelumnya</Text>
                   </TouchableOpacity>
-                  <Text style={styles.numberingPageText}>
-                    {numberPagination}
-                  </Text>
+                  <Text style={styles.numberingPageText}>{pagination}</Text>
                   <TouchableOpacity
                     onPress={() => onNextPagination()}
                     style={styles.nextButton}>

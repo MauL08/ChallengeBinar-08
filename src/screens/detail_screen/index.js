@@ -12,10 +12,13 @@ import React, { useState } from 'react';
 
 import { BackIcon } from '../../core/assets';
 import { styles } from './styles';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getPokedex } from '../../data/slices/pokemonSlice';
+import { setLastSeen } from '../../data/slices/globalSlice';
 
 const DetailScreen = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [catched, setCatched] = useState(false);
 
   const { isLoading } = useSelector(state => state.global);
@@ -55,7 +58,12 @@ const DetailScreen = () => {
           ListHeaderComponent={() => (
             <View style={styles.mainSection}>
               <View style={styles.topNavbar}>
-                <TouchableOpacity onPress={() => navigation.goBack()}>
+                <TouchableOpacity
+                  onPress={() => {
+                    dispatch(getPokedex());
+                    dispatch(setLastSeen(1));
+                    navigation.navigate('Home');
+                  }}>
                   <Image source={BackIcon} style={styles.backIcon} />
                 </TouchableOpacity>
                 <Text style={styles.textTitle}>Pokemon Detail</Text>
