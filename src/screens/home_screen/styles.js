@@ -11,13 +11,18 @@ export const styles = StyleSheet.create({
     backgroundColor: AppConfig.primaryColor,
     paddingVertical: AppConfig.paddingM,
     paddingHorizontal: AppConfig.paddingXL,
-
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    borderRadius: ms(12),
   },
   userSection: {
     alignItems: 'center',
+  },
+  loading: {
+    color: 'orange',
+    width: 200,
+    height: 100,
   },
   imageProfile: {
     marginBottom: ms(4),
@@ -75,5 +80,21 @@ export const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: ms(15),
+  },
+  pokemonContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    elevation: ms(2),
+    paddingVertical: AppConfig.paddingM,
+    paddingHorizontal: AppConfig.paddingL,
+    marginVertical: AppConfig.paddingL,
+    marginHorizontal: AppConfig.paddingM,
+    width: 160,
+  },
+  pokeball: {
+    height: 36,
+    width: 36,
+    marginRight: ms(10),
   },
 });
