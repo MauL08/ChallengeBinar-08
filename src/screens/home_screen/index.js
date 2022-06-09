@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from './styles';
-import { getPokedex } from '../../data/slices/pokemonSlice';
+import { getPokedex, getPokemon } from '../../data/slices/pokemonSlice';
 import { Pokeball } from '../../core/assets';
 
 const HomeScreen = () => {
@@ -82,7 +82,10 @@ const HomeScreen = () => {
             )}
             renderItem={({ item }) => (
               <TouchableOpacity
-                onPress={() => navigation.navigate('Detail')}
+                onPress={() => {
+                  dispatch(getPokemon(item.name));
+                  navigation.navigate('Detail');
+                }}
                 style={styles.pokemonContainer}>
                 <Image source={Pokeball} style={styles.pokeball} />
                 <Text>
