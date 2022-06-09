@@ -97,4 +97,8 @@ export const styles = StyleSheet.create({
     width: 36,
     marginRight: ms(10),
   },
+  numberingPageText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
 });

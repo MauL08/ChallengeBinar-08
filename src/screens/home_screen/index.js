@@ -101,7 +101,9 @@ const HomeScreen = () => {
                     style={styles.prevButton}>
                     <Text style={styles.textButton}>Sebelumnya</Text>
                   </TouchableOpacity>
-                  <Text>{numberPagination}</Text>
+                  <Text style={styles.numberingPageText}>
+                    {numberPagination}
+                  </Text>
                   <TouchableOpacity
                     onPress={() => onNextPagination()}
                     style={styles.nextButton}>

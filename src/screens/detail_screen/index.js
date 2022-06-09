@@ -26,10 +26,23 @@ const DetailScreen = () => {
 
     if (generateNumber > 500 && generateNumber % 2 === 0) {
       setCatched(true);
-      Alert.alert('Good Job', 'You just captured Bulbasaur');
+      Alert.alert(
+        'Good Job!',
+        `You just captured ${
+          pokemonData?.name?.charAt(0).toUpperCase() +
+          pokemonData?.name?.slice(1)
+        }.`,
+        [
+          {
+            text: 'Go to PokeBag',
+            onPress: () => navigation.navigate('Pokebag'),
+          },
+          { text: 'OK' },
+        ],
+      );
     } else {
       setCatched(false);
-      Alert.alert('Noob', 'Please Try Again :)');
+      Alert.alert('Noob!', 'Please Try Again :)');
     }
   };
 
