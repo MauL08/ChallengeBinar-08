@@ -25,10 +25,14 @@ const HomeScreen = () => {
   const [numberPagination, setNumberPagination] = useState(1);
 
   const onNextPagination = async () => {
+    if (pagination === 1) {
+      setNumberPagination(1);
+    }
     if (pokemonData.next === null) {
       return;
     } else {
       dispatch(getPokedex(pokemonData.next));
+
       if (numberPagination >= 0) {
         setNumberPagination(state => state + 1);
         dispatch(setLastSeen(numberPagination + 1));
@@ -104,7 +108,13 @@ const HomeScreen = () => {
                     style={styles.prevButton}>
                     <Text style={styles.textButton}>Sebelumnya</Text>
                   </TouchableOpacity>
-                  <Text style={styles.numberingPageText}>{pagination}</Text>
+                  {pagination === 1 ? (
+                    <Text style={styles.numberingPageText}>{pagination}</Text>
+                  ) : (
+                    <Text style={styles.numberingPageText}>
+                      {numberPagination}
+                    </Text>
+                  )}
                   <TouchableOpacity
                     onPress={() => onNextPagination()}
                     style={styles.nextButton}>

@@ -8,13 +8,14 @@ import {
   FlatList,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import database from '@react-native-firebase/database';
 
 import { BackIcon } from '../../core/assets';
 import { styles } from './styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { getPokedex } from '../../data/slices/pokemonSlice';
-import { setLastSeen } from '../../data/slices/globalSlice';
+import { setLastSeen, setLoading } from '../../data/slices/globalSlice';
 
 const DetailScreen = () => {
   const navigation = useNavigation();
@@ -24,11 +25,47 @@ const DetailScreen = () => {
   const { isLoading } = useSelector(state => state.global);
   const { pokemonData } = useSelector(state => state.pokemon);
 
+  const onPokemonCaptured = () => {
+    const reference = database().ref(`/pokebag/${pokemonData.id}`);
+    const content = {
+      name: pokemonData.name,
+      status: true,
+    };
+
+    try {
+      reference.set(content);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkPokemon = useCallback(async () => {
+    try {
+      dispatch(setLoading(true));
+      database()
+        .ref('/pokebag')
+        .once('value')
+        .then(snapshot => {
+          let pokemonList = Object.values(snapshot.val());
+          pokemonList.forEach(e => {
+            if (pokemonData.name === e.name) {
+              setCatched(e.status);
+            }
+          });
+        });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }, [dispatch, pokemonData.name]);
+
   const onCatch = async () => {
     const generateNumber = Math.round(Math.random() * 1000);
 
     if (generateNumber > 500 && generateNumber % 2 === 0) {
       setCatched(true);
+      onPokemonCaptured();
       Alert.alert(
         'Good Job!',
         `You just captured ${
@@ -45,9 +82,18 @@ const DetailScreen = () => {
       );
     } else {
       setCatched(false);
-      Alert.alert('Noob!', 'Please Try Again :)');
+      Alert.alert('Noob!', 'Please Try Again :)', [
+        {
+          text: 'Give Up!',
+        },
+        { text: 'Try Again', onPress: () => onCatch() },
+      ]);
     }
   };
+
+  useEffect(() => {
+    checkPokemon();
+  }, [checkPokemon]);
 
   return (
     <View style={styles.mainContainer}>
@@ -127,6 +173,7 @@ const DetailScreen = () => {
             </View>
           )}
           numColumns={2}
+          showsVerticalScrollIndicator={false}
           data={pokemonData.moves}
           keyExtractor={(item, index) => String(index)}
           renderItem={({ item }) => (
