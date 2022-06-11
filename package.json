@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "codepush": "appcenter codepush release-react -a akbarma2002-gmail.com/PokemonApp",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start",
