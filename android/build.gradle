@@ -54,3 +54,15 @@ allprojects {
         maven { url 'https://www.jitpack.io' }
     }
 }
+
+plugins {
+  id "org.sonarqube" version "3.4.0.2513"
+}
+
+sonarqube {
+  properties {
+    property "sonar.projectKey", "MauL08_ChallengeBinar-08"
+    property "sonar.organization", "maul08"
+    property "sonar.host.url", "https://sonarcloud.io"
+  }
+}
