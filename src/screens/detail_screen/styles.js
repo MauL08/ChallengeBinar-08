@@ -36,10 +36,12 @@ export const styles = StyleSheet.create({
     marginHorizontal: AppConfig.paddingL,
     marginTop: AppConfig.padding2XL,
   },
-  pokemonImage: {
+  pokemonImage: (left, up) => ({
     height: 200,
     width: 200,
-  },
+    marginLeft: left,
+    marginTop: up,
+  }),
   headerSection: {
     flexDirection: 'row',
   },

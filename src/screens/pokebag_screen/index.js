@@ -28,20 +28,23 @@ const PokebagScreen = () => {
   }, []);
 
   return (
-    <View>
-      <View style={styles.topNavbar}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={BackIcon} style={styles.backIcon} />
-        </TouchableOpacity>
-        <Text style={styles.textPokebag}>PokeBag</Text>
-        <Text style={styles.textCount(pokemonList.length)}>
-          {pokemonList.length}
-        </Text>
-      </View>
+    <View style={styles.mainContainer}>
       <View style={styles.mainSection}>
         <FlatList
           numColumns={2}
+          ListHeaderComponent={() => (
+            <View style={styles.topNavbar}>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Image source={BackIcon} style={styles.backIcon} />
+              </TouchableOpacity>
+              <Text style={styles.textPokebag}>PokeBag</Text>
+              <Text style={styles.textCount(pokemonList.length)}>
+                {pokemonList.length}
+              </Text>
+            </View>
+          )}
           data={pokemonList}
+          showsVerticalScrollIndicator={false}
           keyExtractor={(item, index) => String(index)}
           renderItem={({ item }) => (
             <TouchableOpacity

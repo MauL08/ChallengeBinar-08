@@ -6,7 +6,7 @@ const pokebagSize = count => {
   if (count < 5) {
     return 'green';
   }
-  if (count > 5 || count < 10) {
+  if (count > 5 && count < 10) {
     return 'gold';
   } else {
     return 'red';
@@ -15,6 +15,7 @@ const pokebagSize = count => {
 
 export const styles = StyleSheet.create({
   topNavbar: {
+    borderRadius: ms(12),
     backgroundColor: AppConfig.primaryColor,
     padding: AppConfig.paddingXL,
     flexDirection: 'row',
@@ -57,5 +58,9 @@ export const styles = StyleSheet.create({
     height: 36,
     width: 36,
     marginRight: ms(10),
+  },
+  mainContainer: {
+    flex: 1,
+    backgroundColor: 'white',
   },
 });

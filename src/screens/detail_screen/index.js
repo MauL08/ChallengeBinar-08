@@ -6,6 +6,8 @@ import {
   Alert,
   ActivityIndicator,
   FlatList,
+  Animated,
+  Easing,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import React, { useState, useEffect, useCallback } from 'react';
@@ -21,6 +23,9 @@ const DetailScreen = () => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [catched, setCatched] = useState(false);
+
+  const leftValue = useState(new Animated.Value(0))[0];
+  const upValue = useState(new Animated.Value(0))[0];
 
   const { isLoading } = useSelector(state => state.global);
   const { pokemonData } = useSelector(state => state.pokemon);
@@ -66,6 +71,24 @@ const DetailScreen = () => {
     if (generateNumber > 500 && generateNumber % 2 === 0) {
       setCatched(true);
       onPokemonCaptured();
+
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(upValue, {
+            toValue: 20,
+            duration: 300,
+            useNativeDriver: false,
+            easing: Easing.linear(),
+          }),
+          Animated.timing(upValue, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: false,
+            easing: Easing.linear(),
+          }),
+        ]).start(),
+      );
+
       Alert.alert(
         'Good Job!',
         `You just captured ${
@@ -82,6 +105,30 @@ const DetailScreen = () => {
       );
     } else {
       setCatched(false);
+
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(leftValue, {
+            toValue: -10,
+            duration: 300,
+            useNativeDriver: false,
+            easing: Easing.linear(),
+          }),
+          Animated.timing(leftValue, {
+            toValue: 20,
+            duration: 300,
+            useNativeDriver: false,
+            easing: Easing.linear(),
+          }),
+          Animated.timing(leftValue, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: false,
+            easing: Easing.linear(),
+          }),
+        ]).start(),
+      );
+
       Alert.alert('Noob!', 'Please Try Again :)', [
         {
           text: 'Give Up!',
@@ -126,12 +173,12 @@ const DetailScreen = () => {
                 )}
               </View>
               <View style={styles.headerSection}>
-                <Image
+                <Animated.Image
                   source={{
                     uri: pokemonData?.sprites?.other['official-artwork']
                       .front_default,
                   }}
-                  style={styles.pokemonImage}
+                  style={styles.pokemonImage(leftValue, upValue)}
                 />
                 <View style={styles.headerUserSection}>
                   <Text style={styles.pokemonNameStyle}>
