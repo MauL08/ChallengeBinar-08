@@ -189,6 +189,7 @@ const DetailScreen = () => {
                     <Text style={styles.listNameTitle}>Basic Information</Text>
                     <Text>Height : {pokemonData.height}</Text>
                     <Text>Weight : {pokemonData.weight}</Text>
+                    <Text>Species : {pokemonData?.species?.name}</Text>
                   </View>
                 </View>
               </View>

@@ -75,7 +75,7 @@ export const styles = StyleSheet.create({
   basicInformationContainer: {
     borderRadius: ms(12),
     backgroundColor: 'lightgreen',
-    margin: AppConfig.paddingXL,
+    margin: AppConfig.paddingM,
     padding: AppConfig.paddingL,
   },
   pokemonNameStyle: {
