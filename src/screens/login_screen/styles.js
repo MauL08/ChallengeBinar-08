@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
     padding: AppConfig.paddingL,
   },
   passwordInputBar: {
-    marginVertical: AppConfig.paddingXL,
+    marginTop: AppConfig.paddingL,
     width: width - AppConfig.padding2XL,
     borderWidth: ms(1),
     borderRadius: ms(8),
@@ -42,5 +42,12 @@ export const styles = StyleSheet.create({
   moveButtonText: {
     fontWeight: 'bold',
     color: AppConfig.baseColor,
+  },
+  errorMessage: {
+    fontSize: 12,
+    color: 'red',
+    fontWeight: '500',
+    marginTop: ms(4),
+    marginBottom: AppConfig.paddingL,
   },
 });

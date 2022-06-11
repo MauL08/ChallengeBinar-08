@@ -52,7 +52,7 @@ export const styles = StyleSheet.create({
     borderWidth: ms(1),
     borderRadius: ms(8),
     padding: AppConfig.paddingL,
-    marginVertical: AppConfig.paddingXL,
+    marginVertical: AppConfig.paddingM,
   },
   moveButton: {
     padding: AppConfig.paddingL,
@@ -63,5 +63,12 @@ export const styles = StyleSheet.create({
   moveButtonText: {
     fontWeight: 'bold',
     color: AppConfig.baseColor,
+  },
+  errorMessage: {
+    fontSize: 12,
+    color: 'red',
+    fontWeight: '500',
+    marginTop: ms(4),
+    marginBottom: AppConfig.paddingM,
   },
 });

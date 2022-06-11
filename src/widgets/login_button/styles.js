@@ -4,6 +4,7 @@ import AppConfig from '../../core/utils/app_config';
 
 export const styles = StyleSheet.create({
   button: {
+    marginTop: AppConfig.paddingL,
     backgroundColor: AppConfig.blackColor,
     padding: AppConfig.paddingL,
     borderRadius: ms(6),
