@@ -25,8 +25,6 @@ let registerSchema = yup.object().shape({
 const RegisterScreen = () => {
   const navigation = useNavigation();
 
-  const notUsed = () => {};
-
   return (
     <Formik
       initialValues={{ email: '', password: '', name: '', image: '', bio: '' }}
